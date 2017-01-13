@@ -16,8 +16,9 @@
         "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
+
         "classmap": [
-            "database"
+            "database","app/Http/Service"
         ],
         "psr-4": {
             "App\\": "app/"
