@@ -17,3 +17,23 @@ Route::get('/', function () {
 });
 
 Route::get('/m','IndexController@index');
+Route::get('/m/pay','IndexController@pay');
+
+
+
+//Route::group(['middleware' => ['web']], function () {
+//    //
+//});
+//
+//Route::group(['middleware' => 'web'], function () {
+//    Route::auth();
+//
+//    Route::get('/home', 'HomeController@index');
+//});
+//
+//Route::get('/self/getIndex','SelfController@getIndex');
+//
+////RESTFUL
+//Route::resource('self', 'SelfController');
+//Route::resource('photo', 'SelfController',
+//    ['only' => ['index', 'show']]);

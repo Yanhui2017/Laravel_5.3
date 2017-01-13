@@ -9,12 +9,78 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\TestService;
+use Illuminate\Support\Facades\DB;
 
 class IndexController
 {
-    public function index(){
+
+    public function index()
+    {
         $num = TestService::index();
 
+
         return $num;
+    }
+
+
+    public function pay(){
+        //$num = TestService::index();
+
+        $orderby = $date = '';
+        if(!empty($request['sort'])){
+            $orderby .= " order by {$request['sort']} {$request['order']}";
+        }else{
+            $orderby .= " order by id desc ";
+        }
+        if(!empty($request['search'])){
+            $date .= ' AND date_format(cc.create_time,"%Y-%m-%d") ='. "'{$request['search']}'";
+        }
+        $page_size = empty($request['limit']) ? 10 : $request['limit'];
+        $offset = empty($request['offset']) ? 0 : $request['offset'];
+        $sql = <<<EOT
+select aa.id as 'id', aa.mc_name as 'merchant_name',dd.order_no as 'order_no',dd.account_name as 'merchant_account',dd.account_no as 'account',dd.bank_name as 'bank_title',dd.branch_name as 'bank_name',dd.open_province as 'province',dd.open_city as 'city',dd.funds as 'funds',dd.remark as 'extra',
+case dd.account_type
+    when 1 then '对公'
+    when 0 then '对私' END as 'merchants_type',
+case cc.order_status
+    when 0 then substring(cc.pay_return,81,4)
+    when 1 then substring(cc.pay_return,39,1)
+    when 2 then
+        case substring(cc.pay_return,37,4)
+            when '0061' then '参数不合法'
+            when '0095' then '开户行所在省不能为空或不合法'
+            when '0036' then '不支持该银行编码和银行名称' else cc.pay_return
+        END
+    END as 'code'
+    /* if(substring(cc.pay_return,37,4)='0061','参数不合法',substring(cc.pay_return,37,4)) END as 'code' */,
+case cc.order_status
+    when 1 then '成功'
+    when 2 then '失败'
+    when 0 then '打款结果等待中' END as 'result',
+'' as '备注',cc.create_time
+from brd_qb_merchants aa
+left join brd_qb_merchants_pay bb ON aa.mc_no = bb.mc_no
+left join brd_order_cash cc ON bb.order_no = cc.order_no
+left join brd_op_cash_order dd ON cc.order_no = dd.order_no
+where cc.uid = -1 AND cc.business = 6 $date $orderby
+limit $offset,$page_size;
+EOT;
+
+
+        $countsql = <<<EOT
+select count(*) as count from brd_qb_merchants aa
+left join brd_qb_merchants_pay bb ON aa.mc_no = bb.mc_no
+left join brd_order_cash cc ON bb.order_no = cc.order_no
+left join brd_op_cash_order dd ON cc.order_no = dd.order_no
+where cc.uid = -1 AND cc.business = 6 $date;
+EOT;
+//AND date_format(cc.create_time,'%Y-%m-%d') = '2016-12-16'
+        $users = DB::connection('mysql_pay');
+        $data['rows'] = $users->select($sql);
+        $data['total'] = $users->select($countsql);
+        $data['total'] = json_decode(json_encode($data['total'][0]),true)['count'];
+        return json_encode($data);
+
+        //return $num;
     }
 }

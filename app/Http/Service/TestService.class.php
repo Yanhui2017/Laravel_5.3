@@ -8,14 +8,13 @@
  */
 namespace App\Http\Service;
 
-//use App\Http\Model\User;
+use App\Http\Model\User;
 
 class TestService
 {
     public static function index(){
 
-//        $user = User::where('user_id',1)->first();
-//        return $user;
-        return 123;
+        $user = User::where('id',1)->first();
+        return $user;
     }
 }

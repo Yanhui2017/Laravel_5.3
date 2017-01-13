@@ -62,8 +62,20 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
+        ],
+        'mysql_pay' => [
+            'driver'    => 'mysql',
+            'host'      => 'backup.51huxin.com',
+            'database' => 'baoren',
+            'username'  => 'yanhui',
+            'password'  => 'nvqSt0el4jxyicRh',
+
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
         ],
 
         'pgsql' => [
