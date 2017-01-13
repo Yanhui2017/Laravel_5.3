@@ -52,4 +52,21 @@ $app->singleton(
 |
 */
 
+$env = $app->detectEnvironment(function () use ($app) {
+    $environmentPath = __DIR__ . '/../.env';
+    $setEnv = trim(file_get_contents($environmentPath));
+    if($setEnv == 'local'){
+        $app->loadEnvironmentFrom('.env.local'); //本地开发
+    }else if($setEnv == 'test'){
+        $app->loadEnvironmentFrom('.env.test'); //测试环境
+    }else if($setEnv == 'release'){
+        $app->loadEnvironmentFrom('.env.release'); //预发环境
+    }else if($setEnv == 'product'){
+        $app->loadEnvironmentFrom('.env.product'); //线上环境
+    }else{
+        $app->loadEnvironmentFrom('.env.product'); // 默认
+    }
+});
+
+
 return $app;

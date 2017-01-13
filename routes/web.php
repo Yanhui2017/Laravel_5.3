@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
+    echo time_format('2015-12-12');
     return view('welcome');
 });
