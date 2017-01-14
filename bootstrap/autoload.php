@@ -14,6 +14,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
+//在这里引入第三方组件
 require __DIR__.'/../vendor/autoload.php';
 
 /*

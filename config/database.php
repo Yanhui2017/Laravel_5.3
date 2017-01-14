@@ -122,12 +122,23 @@ return [
         'cluster' => false,
 
         'default' => [
-            'host' => env('REDIS_HOST', 'localhost'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 0,
+            'host'      => env('REDIS_HOST', 'localhost'),
+            'password'  => env('REDIS_PASSWORD', null),
+            'port'      => env('REDIS_PORT', 6379),
+            'database'  => 0,
+        ],
+        'cache' => [
+            'host'      => env('REDIS_STORE_HOST', 'localhost'),
+            'password'  => env('REDIS_STORE_PASSWORD', null),
+            'port'      => env('REDIS_STORE_PORT', 6379),
+            'database'  => 0, //0-15
+        ],
+        'session' => [
+            'host'      => env('REDIS_STORE_HOST', 'localhost'),
+            'password'  => env('REDIS_STORE_PASSWORD', null),
+            'port'      => env('REDIS_STORE_PORT', 6379),
+            'database'  => 15, //0-15
         ],
 
     ],
-
 ];

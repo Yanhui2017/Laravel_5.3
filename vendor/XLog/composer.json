@@ -1,0 +1,16 @@
+{
+    "name": "lio/x-log",
+    "description": "日志格式化",
+    "authors": [
+        {
+            "name": "颜回",
+            "email": "yanhui@51huxin.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "XLog\\": "src/XLog"
+        }
+    }
+}

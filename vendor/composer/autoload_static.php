@@ -279,6 +279,7 @@ class ComposerStaticInitbcf866acffb2287e864a47171f7aba90
     );
 
     public static $classMap = array (
+        'App\\Http\\Common\\Utils\\CLog' => __DIR__ . '/../..' . '/app/Http/Common/Utils/CLog.php',
         'App\\Http\\Service\\TestService' => __DIR__ . '/../..' . '/app/Http/Service/TestService.class.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
@@ -813,6 +814,7 @@ class ComposerStaticInitbcf866acffb2287e864a47171f7aba90
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'XLog\\XLog' => __DIR__ . '/..' . '/XLog/src/XLog/XLog.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

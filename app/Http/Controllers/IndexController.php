@@ -8,17 +8,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Common\Utils\CLog;
 use App\Http\Service\TestService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use XLog\XLog;
 
 class IndexController
 {
-
     public function index()
     {
+        CLog::pay(123);
         $num = TestService::index();
 
+//        DB::connection()->enableQueryLog(); // 开启查询日志
+//        DB::table('uses')->where('id',7)->first(); // 要查看的sql
+//        $query = DB::getQueryLog(); // 获取查询日志
+//        dump($query);
 
+
+//        DB::enableQueryLog();
+//        $user = User::where('user_id',1)->first();
+//        $query = DB::getQueryLog(); // 获取查询日志
+//        dump($query);
+
+
+        //config/app.php-> 'log_max_files' => 30, 日志保留30天
+        //.env.local ->APP_LOG=daily， 格式每天生产一个文件
+        //手动添加日志例子：
+        //Log::info('Showing user profile for user: '.$id);
         return $num;
     }
 

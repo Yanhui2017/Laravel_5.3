@@ -39,6 +39,7 @@ class ComposerAutoloaderInitbcf866acffb2287e864a47171f7aba90
                 $loader->setPsr4($namespace, $path);
             }
 
+            // composer dump-autoload 更新autoload_classmap.php'
             $classMap = require __DIR__ . '/autoload_classmap.php';
             if ($classMap) {
                 $loader->addClassMap($classMap);

@@ -21,9 +21,9 @@ Route::get('/m/pay','IndexController@pay');
 
 
 
-//Route::group(['middleware' => ['web']], function () {
-//    //
-//});
+Route::group(['middleware' => ['log']], function () {
+    Route::get('mm','IndexController@index');
+});
 //
 //Route::group(['middleware' => 'web'], function () {
 //    Route::auth();
