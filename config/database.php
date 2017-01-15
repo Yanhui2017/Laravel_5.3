@@ -67,10 +67,10 @@ return [
         ],
         'mysql_pay' => [
             'driver'    => 'mysql',
-            'host'      => 'backup.51huxin.com',
+            'host'      => '',
             'database' => 'baoren',
             'username'  => 'yanhui',
-            'password'  => 'nvqSt0el4jxyicRh',
+            'password'  => 'nvqSt0el4jxyicRhyan',
 
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
